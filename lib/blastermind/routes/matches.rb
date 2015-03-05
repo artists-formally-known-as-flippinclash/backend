@@ -1,4 +1,5 @@
 require "json"
+require "blastermind/db"
 
 module Blastermind
   module Routes
