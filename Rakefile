@@ -19,3 +19,8 @@ namespace :db do
     `bin/sequel -m db/migrations #{version_option} $DATABASE_URL`
   end
 end
+
+task :deploy do
+  `git push heroku`
+  puts "You should also migrate the db with `heroku run bin/rake db:migrate`"
+end
