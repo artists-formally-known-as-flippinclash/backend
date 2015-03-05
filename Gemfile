@@ -11,6 +11,7 @@ gem "sinatra", "~>1.4"
 group :development do
   gem "dotenv"
   gem "pry"
+  gem "pry-doc"
 end
 
 group :test do
