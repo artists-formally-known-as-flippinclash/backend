@@ -15,7 +15,6 @@ end
 namespace :db do
   require "sequel"
   Sequel.extension(:migration)
-  Sequel.extension(:schema_dumper)
   db = Sequel.connect(ENV.fetch("DATABASE_URL"))
 
   task :migrate, [:version] do |_, args|
@@ -26,10 +25,20 @@ namespace :db do
       puts "Migrating to latest"
       Sequel::Migrator.run(db, "db/migrations")
     end
+
+    Rake::Task["db:schema:dump"].invoke
   end
 
   task :reset do
     Sequel::Migrator.run(db, "db/migrations", target: 0)
     Sequel::Migrator.run(db, "db/migrations")
+  end
+
+  namespace :schema do
+    task :dump do
+      db.extension(:schema_dumper)
+      schema = db.dump_schema_migration
+      File.open("db/schema.rb", "w") { |f| f.write(schema) }
+    end
   end
 end
