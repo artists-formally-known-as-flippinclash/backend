@@ -19,7 +19,7 @@ module Blastermind
       post "/matches" do
         content_type :json
 
-        match = Models::Match.create_to_play
+        match = Models::Match.find_or_create_to_play
 
         # It seems ROAR representers are single-use. I tried to extend the
         # original instance and reuse it hear, but to_json didn't behave

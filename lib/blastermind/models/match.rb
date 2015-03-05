@@ -17,6 +17,10 @@ module Blastermind
         create(state: MATCH_MAKING)
       end
 
+      def self.find_or_create_to_play
+        first(state: MATCH_MAKING) || create_to_play
+      end
+
       def channel
         "match-#{id}"
       end
