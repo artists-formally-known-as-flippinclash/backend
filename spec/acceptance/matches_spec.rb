@@ -7,14 +7,17 @@ describe "/matches" do
 
   describe "GET index" do
     it "responds with matches data" do
-      id = Blastermind::Models::Match.insert(state: "match-making")
+      state = Blastermind::Models::Match::IN_PROGRESS
+      id = Blastermind::Models::Match.insert(state: state)
       match = Blastermind::Models::Match[id]
 
       get "/matches"
 
-      expect(json_response.fetch("data").first.fetch("id")).to eq(match.id)
-      expect(json_response.fetch("data").first.fetch("state")).to eq(match.state)
-      expect(json_response.fetch("data").first.fetch("channel")).to eq(match.channel)
+      data = json_response.fetch("data")
+
+      expect(data.first.fetch("id")).to eq(match.id)
+      expect(data.first.fetch("state")).to eq(match.state)
+      expect(data.first.fetch("channel")).to eq(match.channel)
     end
   end
 end
