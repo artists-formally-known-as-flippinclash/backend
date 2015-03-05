@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 ruby "2.2.0"
 
-gem "sinatra", "~>1.4"
-gem "sequel"
 gem "pg"
 gem "puma"
+gem "sequel"
+gem "sinatra", "~>1.4"
 gem "virtus"
 
 group :development do
