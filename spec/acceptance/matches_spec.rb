@@ -20,4 +20,17 @@ describe "/matches" do
       expect(data.first.fetch("channel")).to eq(match.channel)
     end
   end
+
+  describe "POST create" do
+    it "creates new match and responds with it" do
+      post "/matches"
+
+      data = json_response.fetch("data")
+
+      expect(last_response.status).to eq(201) # created
+      expect(data).to include("id")
+      expect(data).to include("channel")
+      expect(data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
+    end
+  end
 end

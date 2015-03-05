@@ -7,6 +7,10 @@ module Blastermind
         FINISHED = "finished".freeze,
       ].freeze
 
+      def self.create
+        self.insert(state: MATCH_MAKING)
+      end
+
       def channel
         "match-#{id}"
       end
