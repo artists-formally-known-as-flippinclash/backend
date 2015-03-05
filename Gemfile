@@ -9,6 +9,7 @@ group :development do
 end
 
 group :test do
+  gem "database_cleaner"
   gem "rack-test"
   gem "rspec", "~>3.2"
 end

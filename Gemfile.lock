@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    database_cleaner (1.4.0)
     diff-lcs (1.2.5)
     dotenv (1.0.2)
     pg (0.18.1)
@@ -33,6 +34,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  database_cleaner
   dotenv
   pg
   rack-test
