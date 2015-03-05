@@ -21,12 +21,14 @@ describe "/matches" do
   end
 
   describe "POST create" do
+    let(:player_name) { "J" }
+    let(:player_params) { { player: { name: player_name } } }
+
     context "match seeking players exists" do
       it "responds with existing match" do
         match = Blastermind::Models::Match.create_to_play
 
-        request_data = { player: { name: "J" } }
-        post "/matches", request_data
+        post "/matches", player_params
 
         expect(last_response.status).to eq(201) # created
         expect(response_data.fetch("id")).to eq(match.id)
@@ -37,7 +39,7 @@ describe "/matches" do
 
     context "no match exists that is seeking players" do
       it "creates a new match and responds with it" do
-        expect { post "/matches" }.to change { Blastermind::Models::Match.count }.by(1)
+        expect { post "/matches", player_params }.to change { Blastermind::Models::Match.count }.by(1)
 
         expect(last_response.status).to eq(201) # created
         expect(response_data).to include("id")
