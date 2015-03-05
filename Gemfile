@@ -3,6 +3,7 @@ ruby "2.2.0"
 
 gem "pg"
 gem "puma"
+gem "rake"
 gem "roar"
 gem "sequel"
 gem "sinatra", "~>1.4"

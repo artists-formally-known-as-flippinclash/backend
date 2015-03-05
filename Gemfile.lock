@@ -32,6 +32,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rake (10.4.2)
     representable (2.1.5)
       multi_json
       nokogiri
@@ -76,6 +77,7 @@ DEPENDENCIES
   pry
   puma
   rack-test
+  rake
   roar
   rspec (~> 3.2)
   sequel
