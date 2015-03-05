@@ -1,0 +1,1 @@
+git push heroku && heroku run bin/rake db:migrate
