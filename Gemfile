@@ -8,7 +8,6 @@ gem "rake"
 gem "roar"
 gem "sequel"
 gem "sinatra", "~>1.4"
-gem "sinatra-cross_origin"
 
 group :development do
   gem "dotenv"
