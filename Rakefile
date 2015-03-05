@@ -27,4 +27,9 @@ namespace :db do
       Sequel::Migrator.run(db, "db/migrations")
     end
   end
+
+  task :reset do
+    Sequel::Migrator.run(db, "db/migrations", target: 0)
+    Sequel::Migrator.run(db, "db/migrations")
+  end
 end
