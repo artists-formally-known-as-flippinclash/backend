@@ -14,6 +14,7 @@ describe "/matches" do
 
       expect(json.fetch("data").first.fetch("id")).to eq(match.id)
       expect(json.fetch("data").first.fetch("state")).to eq(match.state)
+      expect(json.fetch("data").first.fetch("channel")).to eq(match.channel)
     end
   end
 end

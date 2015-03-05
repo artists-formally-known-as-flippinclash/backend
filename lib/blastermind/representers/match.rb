@@ -7,6 +7,7 @@ module Blastermind
 
       property :id
       property :state
+      property :channel
     end
   end
 end
