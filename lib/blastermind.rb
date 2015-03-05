@@ -5,3 +5,4 @@ unless ENV["RACK_ENV"] == "production"
 end
 
 require "blastermind/app"
+require "blastermind/models"
