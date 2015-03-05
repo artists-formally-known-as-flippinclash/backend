@@ -30,6 +30,7 @@ module Blastermind
           .trigger(Models::Match::MATCH_STARTED, pusher_data.to_hash)
 
         status 201
+        response['Access-Control-Allow-Origin'] = "*"
         match
           .extend(Representers::IndividualMatch)
           .to_json
