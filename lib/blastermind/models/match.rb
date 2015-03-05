@@ -1,3 +1,5 @@
+require "sequel/model"
+
 module Blastermind
   module Models
     class Match < Sequel::Model
