@@ -7,7 +7,6 @@ gem "rake"
 gem "roar"
 gem "sequel"
 gem "sinatra", "~>1.4"
-gem "virtus"
 
 group :development do
   gem "dotenv"
