@@ -3,6 +3,8 @@ require "sequel/model"
 module Blastermind
   module Models
     class Match < Sequel::Model
+      MAX_PLAYERS = 4
+
       EVENTS = [
         MATCH_STARTED = "match-started".freeze,
         MATCH_PROGRESS = "match-progress".freeze,
@@ -20,7 +22,13 @@ module Blastermind
       end
 
       def self.find_or_create_to_play
-        first(state: MATCH_MAKING) || create_to_play
+        playable || create_to_play
+      end
+
+      def self.playable
+        where(state: MATCH_MAKING).find do |match|
+          match.players.count < MAX_PLAYERS
+        end
       end
 
       one_to_many :players

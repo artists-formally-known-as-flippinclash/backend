@@ -37,6 +37,22 @@ describe "/matches" do
       end
     end
 
+    context "existing match is full" do
+      it "creates a new match and responds with it" do
+        match = Blastermind::Models::Match.create_to_play
+        Blastermind::Models::Match::MAX_PLAYERS.times do |n|
+          Blastermind::Models::Player.create(name: "player#{n}", match: match)
+        end
+
+        expect { post "/matches", player_params }.to change { Blastermind::Models::Match.count }.by(1)
+
+        expect(last_response.status).to eq(201) # created
+        expect(response_data).to include("id")
+        expect(response_data).to include("channel")
+        expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
+      end
+    end
+
     context "no match exists that is seeking players" do
       it "creates a new match and responds with it" do
         expect { post "/matches", player_params }.to change { Blastermind::Models::Match.count }.by(1)
