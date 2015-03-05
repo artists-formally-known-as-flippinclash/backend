@@ -2,6 +2,8 @@ require "spec_helper"
 require "rack/test"
 require "database_cleaner"
 require "blastermind"
+require "pusher-fake"
+require "pusher-fake/support/rspec"
 
 module Requests
   include Rack::Test::Methods
