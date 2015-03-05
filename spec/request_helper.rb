@@ -1,5 +1,5 @@
 require 'rack/test'
-require 'blastermind/app'
+require 'blastermind'
 require 'spec_helper'
 
 module Requests
