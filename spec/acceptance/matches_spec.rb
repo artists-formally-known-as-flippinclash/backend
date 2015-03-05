@@ -1,18 +1,19 @@
 require "request_helper"
 require "json"
-require "blastermind/db"
+require "blastermind/models/match"
 
 describe "/matches" do
   describe "index" do
     it "responds with matches data" do
-      matches = Blastermind::DB[:matches]
-      matches.insert(state: "match-making")
+      id = Blastermind::Models::Match.insert(state: "match-making")
+      match = Blastermind::Models::Match[id]
 
       get "/matches"
 
       json = JSON.parse(last_response.body)
 
-      expect(json.fetch("data").first.fetch("state")).to eq("match-making")
+      expect(json.fetch("data").first.fetch("id")).to eq(match.id)
+      expect(json.fetch("data").first.fetch("state")).to eq(match.state)
     end
   end
 end
