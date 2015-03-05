@@ -23,8 +23,6 @@ module Blastermind
       end
 
       post "/matches" do
-        content_type :json
-
         match = Models::Match.find_or_create_to_play
         Models::Player.create(name: player_params[:name], match: match)
 
