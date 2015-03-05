@@ -8,8 +8,6 @@ module Blastermind
   module Routes
     class Matches < Sinatra::Application
       get "/matches" do
-        content_type :json
-
         Models::Match
           .all
           .extend(Representers::Matches)
@@ -29,6 +27,7 @@ module Blastermind
         Pusher[match.channel]
           .trigger(Models::Match::MATCH_STARTED, pusher_data.to_hash)
 
+        content_type :json
         status 201
         response['Access-Control-Allow-Origin'] = "*"
         match
