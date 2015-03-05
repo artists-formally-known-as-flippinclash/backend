@@ -1,3 +1,5 @@
+require "json"
+
 module Blastermind
   module Routes
     class Matches < Sinatra::Application
