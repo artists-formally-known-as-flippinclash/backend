@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "sinatra", "~>1.4"
 gem "sequel"
 gem "pg"
+gem "virtus"
 
 group :development do
   gem "dotenv"
