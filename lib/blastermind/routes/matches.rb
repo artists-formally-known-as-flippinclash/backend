@@ -8,7 +8,7 @@ module Blastermind
         content_type :json
         matches = DB[:matches]
         matches = matches.all
-        %Q({"matches": #{matches.to_json}})
+        %Q({"data": #{matches.to_json}})
       end
     end
   end

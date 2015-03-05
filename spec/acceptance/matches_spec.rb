@@ -12,7 +12,7 @@ describe "/matches" do
 
       json = JSON.parse(last_response.body)
 
-      expect(json.fetch("matches").first.fetch("state")).to eq("match-making")
+      expect(json.fetch("data").first.fetch("state")).to eq("match-making")
     end
   end
 end
