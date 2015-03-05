@@ -23,13 +23,16 @@ describe "/matches" do
   end
 
   describe "POST create" do
-    it "creates new match and responds with it" do
-      post "/matches"
 
-      expect(last_response.status).to eq(201) # created
-      expect(response_data).to include("id")
-      expect(response_data).to include("channel")
-      expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
+    context "no match exists that is seeking players" do
+      it "creates a new match and responds with it" do
+        expect { post "/matches" }.to change { Blastermind::Models::Match.count }.by(1)
+
+        expect(last_response.status).to eq(201) # created
+        expect(response_data).to include("id")
+        expect(response_data).to include("channel")
+        expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
+      end
     end
   end
 end
