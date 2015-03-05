@@ -1,4 +1,6 @@
 require "json"
+require "sinatra"
+require "sinatra/cross_origin"
 require "blastermind/models/match"
 require "blastermind/pusher"
 require "blastermind/representers/individual_match"
@@ -7,6 +9,12 @@ require "blastermind/representers/matches"
 module Blastermind
   module Routes
     class Matches < Sinatra::Application
+      register Sinatra::CrossOrigin
+
+      configure do
+        enable :cross_origin
+      end
+
       get "/matches" do
         Models::Match
           .all
@@ -29,7 +37,6 @@ module Blastermind
 
         content_type :json
         status 201
-        response['Access-Control-Allow-Origin'] = "*"
         match
           .extend(Representers::IndividualMatch)
           .to_json
