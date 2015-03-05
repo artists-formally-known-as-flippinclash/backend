@@ -1,5 +1,6 @@
 require 'rack/test'
-require 'blastermind/app'
+require "database_cleaner"
+require 'blastermind'
 require 'spec_helper'
 
 module Requests
@@ -12,4 +13,16 @@ end
 
 RSpec.configure do |c|
   c.include Requests
+
+  c.before :suite do
+    DatabaseCleaner[:sequel].strategy = :transaction
+  end
+
+  c.before :each do
+    DatabaseCleaner[:sequel].start
+  end
+
+  c.after :each do
+    DatabaseCleaner[:sequel].clean
+  end
 end
