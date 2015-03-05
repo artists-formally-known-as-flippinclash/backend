@@ -8,9 +8,7 @@ describe "/matches" do
 
   describe "GET index" do
     it "responds with matches data" do
-      state = Blastermind::Models::Match::IN_PROGRESS
-      id = Blastermind::Models::Match.insert(state: state)
-      match = Blastermind::Models::Match[id]
+      match = Blastermind::Models::Match.create_to_play
 
       get "/matches"
 
