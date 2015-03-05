@@ -1,7 +1,7 @@
-require 'rack/test'
+require "spec_helper"
+require "rack/test"
 require "database_cleaner"
-require 'blastermind'
-require 'spec_helper'
+require "blastermind"
 
 module Requests
   include Rack::Test::Methods
