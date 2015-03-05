@@ -13,8 +13,8 @@ module Blastermind
         FINISHED = "finished".freeze,
       ].freeze
 
-      def self.create
-        self.insert(state: MATCH_MAKING)
+      def self.create_to_play
+        create(state: MATCH_MAKING)
       end
 
       def channel
