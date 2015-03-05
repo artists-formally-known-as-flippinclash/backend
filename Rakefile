@@ -1,3 +1,8 @@
+unless ENV["RACK_ENV"] == "production"
+  require "dotenv"
+  Dotenv.load
+end
+
 desc "Start a Blastermind console"
 task :console do
   lib_path = File.expand_path('lib')
@@ -9,8 +14,6 @@ end
 
 namespace :db do
   task :migrate do
-    require "dotenv"
-    Dotenv.load
     version = ENV["VERSION"]
     version_option = "-M #{version}" if version
     `bin/sequel -m db/migrations #{version_option} $DATABASE_URL`
