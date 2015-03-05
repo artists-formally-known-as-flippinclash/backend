@@ -4,6 +4,7 @@ require "blastermind/models/match"
 
 describe "/matches" do
   let(:json_response) { JSON.parse(last_response.body) }
+  let(:response_data) { json_response.fetch("data") }
 
   describe "GET index" do
     it "responds with matches data" do
@@ -25,12 +26,10 @@ describe "/matches" do
     it "creates new match and responds with it" do
       post "/matches"
 
-      data = json_response.fetch("data")
-
       expect(last_response.status).to eq(201) # created
-      expect(data).to include("id")
-      expect(data).to include("channel")
-      expect(data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
+      expect(response_data).to include("id")
+      expect(response_data).to include("channel")
+      expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
     end
   end
 end
