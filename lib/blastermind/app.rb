@@ -1,5 +1,6 @@
 require "sinatra"
 require "blastermind/db"
+require "blastermind/pusher"
 require "blastermind/routes/matches"
 
 module Blastermind
