@@ -23,6 +23,8 @@ module Blastermind
         first(state: MATCH_MAKING) || create_to_play
       end
 
+      one_to_many :players
+
       def channel
         "match-#{id}"
       end
