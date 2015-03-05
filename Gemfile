@@ -3,6 +3,7 @@ ruby "2.2.0"
 
 gem "pg"
 gem "puma"
+gem "pusher"
 gem "rake"
 gem "roar"
 gem "sequel"
@@ -12,6 +13,7 @@ group :development do
   gem "dotenv"
   gem "pry"
   gem "pry-doc"
+  gem "pusher-fake"
 end
 
 group :test do
