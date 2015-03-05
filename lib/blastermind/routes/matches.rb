@@ -20,6 +20,7 @@ module Blastermind
         content_type :json
 
         match = Models::Match.find_or_create_to_play
+        Models::Player.create(name: player_params[:name], match: match)
 
         # It seems ROAR representers are single-use. I tried to extend the
         # original instance and reuse it hear, but to_json didn't behave
@@ -32,6 +33,12 @@ module Blastermind
         match
           .extend(Representers::IndividualMatch)
           .to_json
+      end
+
+      private
+
+      def player_params
+        params.fetch("player") { Hash.new }
       end
     end
   end

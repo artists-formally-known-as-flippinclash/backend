@@ -47,5 +47,12 @@ describe "/matches" do
         expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING)
       end
     end
+
+    it "includes player in match" do
+      post "/matches", player_params
+
+      players = response_data.fetch("players")
+      expect(players.first.fetch("name")).to eq("J")
+    end
   end
 end
