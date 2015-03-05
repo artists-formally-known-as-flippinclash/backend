@@ -13,14 +13,18 @@ task :console do
 end
 
 namespace :db do
-  task :migrate do
-    version = ENV["VERSION"]
-    version_option = "-M #{version}" if version
-    `bin/sequel -m db/migrations #{version_option} $DATABASE_URL`
-  end
-end
+  require "sequel"
+  Sequel.extension(:migration)
+  Sequel.extension(:schema_dumper)
+  db = Sequel.connect(ENV.fetch("DATABASE_URL"))
 
-task :deploy do
-  `git push heroku`
-  puts "You should also migrate the db with `heroku run bin/rake db:migrate`"
+  task :migrate, [:version] do |_, args|
+    if args[:version]
+      puts "Migrating to version #{args[:version]}"
+      Sequel::Migrator.run(db, "db/migrations", target: args[:version].to_i)
+    else
+      puts "Migrating to latest"
+      Sequel::Migrator.run(db, "db/migrations")
+    end
+  end
 end
