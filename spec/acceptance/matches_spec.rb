@@ -5,7 +5,7 @@ require "blastermind/db"
 describe "/matches" do
   describe "index" do
     it "responds with matches data" do
-      matches = DB[:matches]
+      matches = Blastermind::DB[:matches]
       matches.insert(state: "match-making")
 
       get "/matches"

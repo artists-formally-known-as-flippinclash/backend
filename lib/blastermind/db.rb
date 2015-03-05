@@ -1,3 +1,5 @@
 require "sequel"
 
-DB = Sequel.connect(ENV["DATABASE_URL"])
+module Blastermind
+  DB = Sequel.connect(ENV["DATABASE_URL"])
+end
