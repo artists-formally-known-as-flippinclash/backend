@@ -20,6 +20,7 @@ end
 
 group :test do
   gem "database_cleaner"
+  gem "fakeredis"
   gem "pusher-fake"
   gem "rack-test"
   gem "rspec", "~>3.2"
