@@ -1,5 +1,6 @@
 require "request_helper"
 require "json"
+require "blastermind/models/code_peg"
 require "blastermind/models/match"
 
 describe "/matches/{match_id}/players/{player_id}/guesses" do
@@ -7,11 +8,13 @@ describe "/matches/{match_id}/players/{player_id}/guesses" do
   let(:response_data) { json_response.fetch("data") }
 
   describe "POST create" do
-    context "correct guess" do
-      let(:match) { Blastermind::Models::Match.create_to_play }
-      let(:round) { match.current_round }
-      let(:player) { Blastermind::Models::Player.create(name: "J", match: match) }
+    let(:match) { Blastermind::Models::Match.create }
+    let(:round) { Blastermind::Models::Round.generate(match, solution).save }
+    let(:player) { Blastermind::Models::Player.create(name: "J", match: match) }
+    let(:solution) { Blastermind::Models::CodePeg::STATES.first(solution_size) }
+    let(:solution_size) { 4 }
 
+    context "correct guess" do
       it "responds with 'correct' outcome" do
         guess_params = {
           guess: { code_pegs: round.solution }
