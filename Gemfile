@@ -3,7 +3,7 @@ ruby "2.2.0"
 
 gem "aasm"
 gem "pg"
-gem "puma"
+#gem "puma"
 gem "pusher"
 gem "rake"
 gem "resque"
