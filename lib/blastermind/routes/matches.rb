@@ -33,10 +33,12 @@ module Blastermind
 
         player_params = body.fetch("player") { Hash.new }
 
-        match = Models::Match.find_or_create_to_play
+        match = Models::Match.find_or_create_to_play do |match|
+          Resque.enqueue_in(30, Jobs::MatchStart, match.id)
+        end
+
         Models::Player.create(name: player_params["name"], match: match)
 
-        Resque.enqueue_in(30, Jobs::MatchStart, match.id)
 
         content_type :json
         status 201

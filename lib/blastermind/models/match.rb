@@ -18,12 +18,14 @@ module Blastermind
         FINISHED = :finished,
       ].freeze
 
-      def self.create_to_play
-        create(state: MATCH_MAKING.to_s)
+      def self.create_to_play(&on_create)
+        on_create ||= lambda{|*|}
+        create(state: MATCH_MAKING.to_s).tap(&on_create)
       end
 
-      def self.find_or_create_to_play
-        playable || create_to_play
+      def self.find_or_create_to_play(&on_create)
+        on_create ||= lambda{|*|}
+        playable || create_to_play(&on_create)
       end
 
       def self.playable
