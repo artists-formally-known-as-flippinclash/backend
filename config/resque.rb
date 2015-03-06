@@ -1,5 +1,2 @@
 require "resque"
-
-Resque.configure do |c|
-  c.redis = ENV.fetch("REDISTOGO_URL")
-end
+Resque.redis = ENV.fetch("REDISTOGO_URL")
