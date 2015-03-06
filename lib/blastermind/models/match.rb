@@ -24,7 +24,6 @@ module Blastermind
       end
 
       def self.find_or_create_to_play(&on_create)
-        on_create ||= lambda{|*|}
         playable || create_to_play(&on_create)
       end
 
