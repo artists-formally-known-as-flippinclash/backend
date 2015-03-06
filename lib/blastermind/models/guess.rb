@@ -1,3 +1,5 @@
+require "blastermind/models/feedback"
+
 module Blastermind
   module Models
     class Guess < Sequel::Model
@@ -11,6 +13,10 @@ module Blastermind
 
       def correct?
         code_pegs == round.solution
+      end
+
+      def feedback
+        @feedback ||= Feedback.new(guess: self, round: round)
       end
 
       def outcome

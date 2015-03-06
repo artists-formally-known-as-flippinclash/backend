@@ -1,4 +1,5 @@
 require "roar/json"
+require "blastermind/representers/feedback"
 
 module Blastermind
   module Representers
@@ -7,6 +8,7 @@ module Blastermind
 
       property :id
       property :outcome
+      property :feedback, extend: Feedback
     end
   end
 end
