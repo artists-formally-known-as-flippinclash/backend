@@ -5,6 +5,12 @@ Sequel.migration do
       String :state, :null=>false
     end
     
+    create_table(:rounds) do
+      primary_key :id
+      String :solution, :null=>false
+      TrueClass :finished, :default=>false, :null=>false
+    end
+    
     create_table(:schema_info) do
       Integer :version, :default=>0, :null=>false
     end
