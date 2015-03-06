@@ -1,10 +1,12 @@
 require "aasm"
 require "sequel/model"
+require "blastermind/models/round"
 
 module Blastermind
   module Models
     class Match < Sequel::Model
       MAX_PLAYERS = 4
+      ROUNDS_COUNT = 1
 
       EVENTS = [
         MATCH_STARTED = "match-started".freeze,
@@ -20,7 +22,10 @@ module Blastermind
 
       def self.create_to_play(&on_create)
         on_create ||= lambda{|*|}
-        create(state: MATCH_MAKING.to_s).tap(&on_create)
+        create(state: MATCH_MAKING.to_s).tap do |match|
+          ROUNDS_COUNT.times { Round.generate(match).save }
+          on_create.call(match)
+        end
       end
 
       def self.find_or_create_to_play(&on_create)
