@@ -49,12 +49,7 @@ module Blastermind
           transitions from: MATCH_MAKING, to: IN_PROGRESS
 
           after do
-            # It seems ROAR representers are single-use. I tried to extend the
-            # original instance and reuse it hear, but to_json didn't behave
-            # as expected after to_hash was called ಠ_ಠ
-            pusher_data = extend(Representers::IndividualMatch)
-            Pusher[channel]
-              .trigger(Models::Match::MATCH_STARTED, pusher_data.to_hash)
+            trigger(Models::Match::MATCH_STARTED)
           end
         end
       end
@@ -64,6 +59,16 @@ module Blastermind
 
       def channel
         "match-#{id}"
+      end
+
+      private
+
+      def trigger(event)
+        # It seems ROAR representers are single-use. I tried to extend the
+        # original instance and reuse it hear, but to_json didn't behave
+        # as expected after to_hash was called ಠ_ಠ
+        pusher_data = extend(Representers::IndividualMatch)
+        Pusher[channel].trigger(event, pusher_data.to_hash)
       end
     end
   end
