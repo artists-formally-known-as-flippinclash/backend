@@ -13,6 +13,10 @@ module Blastermind
 
       many_to_one :match
 
+      def finished?
+        finished
+      end
+
       # This is such a hack, it seems I don't know how to use Sequel's pg_array
       def solution
         solution_string = super
