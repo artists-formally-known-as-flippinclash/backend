@@ -52,13 +52,19 @@ module Blastermind
       end
 
       post "/matches/:id/start" do
+        content_type :json
+
         match_id = params.fetch("id")
         match = Models::Match[match_id]
 
         # THIS IS A HACK. WHY WON'T THE JOBS WORK ON HEROKU???
-        match.start!
+        begin
+          match.start!
+        rescue AASM::InvalidTransition
+          return { errors: ["The match has already started!"] }.to_json
+        end
 
-        nil
+        "{}"
       end
     end
   end

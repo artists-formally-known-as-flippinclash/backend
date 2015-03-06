@@ -8,7 +8,7 @@ describe "/matches/{match_id}/players/{player_id}/guesses" do
   let(:response_data) { json_response.fetch("data") }
 
   describe "POST create" do
-    let(:match) { Blastermind::Models::Match.create }
+    let(:match) { Blastermind::Models::Match.create(state: Blastermind::Models::Match::IN_PROGRESS) }
     let!(:round) { Blastermind::Models::Round.generate(match, solution).save }
     let(:player) { Blastermind::Models::Player.create(name: "J", match: match) }
     let(:solution) { Blastermind::Models::CodePeg::STATES.first(solution_size) }
