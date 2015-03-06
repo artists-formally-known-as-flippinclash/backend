@@ -11,6 +11,8 @@ require "blastermind/representers/matches"
 module Blastermind
   module Routes
     class Matches < Sinatra::Application
+      MATCH_START_DELAY = ENV.fetch("MATCH_START_DELAY") { 30 }.to_i
+
       register Sinatra::CrossOrigin
 
       configure do
@@ -34,7 +36,7 @@ module Blastermind
         player_params = body.fetch("player") { Hash.new }
 
         match = Models::Match.find_or_create_to_play do |match|
-          Resque.enqueue_in(30, Jobs::MatchStart, match.id)
+          Resque.enqueue_in(MATCH_START_DELAY, Jobs::MatchStart, match.id)
         end
 
         Models::Player.create(name: player_params["name"], match: match)
