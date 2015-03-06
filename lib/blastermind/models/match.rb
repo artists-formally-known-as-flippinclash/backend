@@ -1,3 +1,4 @@
+require "aasm"
 require "sequel/model"
 
 module Blastermind
@@ -28,6 +29,27 @@ module Blastermind
       def self.playable
         where(state: MATCH_MAKING.to_s).find do |match|
           match.players.count < MAX_PLAYERS
+        end
+      end
+
+      include AASM
+
+      aasm column: :state do
+        state MATCH_MAKING
+        state IN_PROGRESS
+        state FINISHED
+
+        event :start do
+          transitions from: MATCH_MAKING, to: IN_PROGRESS
+
+          after do
+            # It seems ROAR representers are single-use. I tried to extend the
+            # original instance and reuse it hear, but to_json didn't behave
+            # as expected after to_hash was called ಠ_ಠ
+            pusher_data = extend(Representers::IndividualMatch)
+            Pusher[channel]
+              .trigger(Models::Match::MATCH_STARTED, pusher_data.to_hash)
+          end
         end
       end
 
