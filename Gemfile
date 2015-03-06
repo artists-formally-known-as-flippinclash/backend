@@ -12,6 +12,7 @@ gem "roar"
 gem "sequel"
 gem "sinatra", "~>1.4"
 gem "sinatra-cross_origin"
+gem "thin"
 
 group :development do
   gem "dotenv"
