@@ -1,1 +1,3 @@
-git push heroku && heroku run bin/rake db:migrate
+git push heroku && heroku run bin/rake db:migrate --app blastermind
+git push heroku-resque
+git push heroku-resque-scheduler
