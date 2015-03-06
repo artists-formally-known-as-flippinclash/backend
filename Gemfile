@@ -16,11 +16,11 @@ group :development do
   gem "dotenv"
   gem "pry"
   gem "pry-doc"
-  gem "pusher-fake"
 end
 
 group :test do
   gem "database_cleaner"
+  gem "pusher-fake"
   gem "rack-test"
   gem "rspec", "~>3.2"
 end
