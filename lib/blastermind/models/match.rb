@@ -49,7 +49,7 @@ module Blastermind
           transitions from: MATCH_MAKING, to: IN_PROGRESS
 
           after do
-            trigger(Models::Match::MATCH_STARTED)
+            trigger(MATCH_STARTED)
           end
         end
       end
