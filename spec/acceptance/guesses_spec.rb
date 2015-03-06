@@ -9,7 +9,7 @@ describe "/matches/{match_id}/players/{player_id}/guesses" do
 
   describe "POST create" do
     let(:match) { Blastermind::Models::Match.create }
-    let(:round) { Blastermind::Models::Round.generate(match, solution).save }
+    let!(:round) { Blastermind::Models::Round.generate(match, solution).save }
     let(:player) { Blastermind::Models::Player.create(name: "J", match: match) }
     let(:solution) { Blastermind::Models::CodePeg::STATES.first(solution_size) }
     let(:solution_size) { 4 }
@@ -28,9 +28,23 @@ describe "/matches/{match_id}/players/{player_id}/guesses" do
     end
 
     context "incorrect guess" do
-      it "responds with 'incorrect' outcome"
+      let(:guess_params) do
+        { guess: { code_pegs: solution.rotate } }
+      end
 
-      it "includes feedback"
+      it "responds with 'incorrect' outcome" do
+        post "/matches/#{match.id}/players/#{player.id}/guesses", guess_params.to_json, "CONTENT_TYPE" => "application/json"
+
+        expect(response_data.fetch("outcome")).to eq(Blastermind::Models::Guess::INCORRECT.to_s)
+      end
+
+      it "includes feedback" do
+        post "/matches/#{match.id}/players/#{player.id}/guesses", guess_params.to_json, "CONTENT_TYPE" => "application/json"
+
+        feedback = response_data.fetch("feedback")
+        expect(feedback.fetch("peg_count")).to eq(solution_size)
+        expect(feedback.fetch("position_count")).to eq(0)
+      end
     end
   end
 end
