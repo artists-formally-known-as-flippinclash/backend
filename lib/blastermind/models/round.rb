@@ -11,6 +11,7 @@ module Blastermind
         new(solution: Sequel.pg_array(solution, :code_peg), match: match)
       end
 
+      one_to_many :guesses
       many_to_one :match
 
       def finished?
