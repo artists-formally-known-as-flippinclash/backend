@@ -50,6 +50,16 @@ module Blastermind
           .extend(Representers::IndividualMatch)
           .to_json
       end
+
+      post "/matches/:id/start" do
+        match_id = params.fetch("id")
+        match = Models::Match[match_id]
+
+        # THIS IS A HACK. WHY WON'T THE JOBS WORK ON HEROKU???
+        match.start!
+
+        nil
+      end
     end
   end
 end
