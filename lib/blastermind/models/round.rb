@@ -4,6 +4,13 @@ require "blastermind/models/code_peg"
 module Blastermind
   module Models
     class Round < Sequel::Model
+      SOLUTION_LENGTH = 4
+
+      def self.generate
+        solution = CodePeg::STATES.sample(SOLUTION_LENGTH)
+        new(solution: Sequel.pg_array(solution, :code_peg))
+      end
+
       # This is such a hack, it seems I don't know how to use Sequel's pg_array
       def solution
         solution_string = super
