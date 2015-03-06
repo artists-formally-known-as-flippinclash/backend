@@ -11,6 +11,8 @@ module Blastermind
         new(solution: Sequel.pg_array(solution, :code_peg))
       end
 
+      many_to_one :match
+
       # This is such a hack, it seems I don't know how to use Sequel's pg_array
       def solution
         solution_string = super

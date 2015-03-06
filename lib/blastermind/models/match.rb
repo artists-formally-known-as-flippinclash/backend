@@ -55,6 +55,7 @@ module Blastermind
       end
 
       one_to_many :players
+      one_to_many :rounds
 
       def channel
         "match-#{id}"
