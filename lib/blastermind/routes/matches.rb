@@ -38,7 +38,11 @@ module Blastermind
         end
 
         Models::Player.create(name: player_params["name"], match: match)
+        match.reload()
 
+        if match.players.count == Models::Match::MAX_PLAYERS
+          match.start!
+        end
 
         content_type :json
         status 201
