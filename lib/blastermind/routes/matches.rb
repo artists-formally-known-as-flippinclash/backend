@@ -25,6 +25,14 @@ module Blastermind
       end
 
       post "/matches" do
+        body = begin
+                JSON.parse(request.body.read)
+               rescue JSON::ParserError
+                 params
+               end
+
+        player_params = body.fetch(:player) { Hash.new }
+
         match = Models::Match.find_or_create_to_play
         Models::Player.create(name: player_params[:name], match: match)
 
@@ -35,12 +43,6 @@ module Blastermind
         match
           .extend(Representers::IndividualMatch)
           .to_json
-      end
-
-      private
-
-      def player_params
-        params.fetch("player") { Hash.new }
       end
     end
   end
