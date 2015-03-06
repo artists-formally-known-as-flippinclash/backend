@@ -12,13 +12,13 @@ module Blastermind
       ].freeze
 
       STATES = [
-        MATCH_MAKING = "match-making".freeze,
-        IN_PROGRESS = "in-progress".freeze,
-        FINISHED = "finished".freeze,
+        MATCH_MAKING = :match_making,
+        IN_PROGRESS = :in_progress,
+        FINISHED = :finished,
       ].freeze
 
       def self.create_to_play
-        create(state: MatchStateMachine::MATCH_MAKING)
+        create(state: MATCH_MAKING.to_s)
       end
 
       def self.find_or_create_to_play
@@ -26,7 +26,7 @@ module Blastermind
       end
 
       def self.playable
-        where(state: MATCH_MAKING).find do |match|
+        where(state: MATCH_MAKING.to_s).find do |match|
           match.players.count < MAX_PLAYERS
         end
       end
