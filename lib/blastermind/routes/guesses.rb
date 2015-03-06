@@ -30,6 +30,8 @@ module Blastermind
           round: round,
         )
 
+        round.attempt(guess)
+
         content_type :json
         status 201
         guess

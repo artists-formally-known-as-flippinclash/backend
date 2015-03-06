@@ -14,6 +14,14 @@ module Blastermind
       def finished?
         finished
       end
+
+      def finished!
+        update(finished: true)
+      end
+
+      def attempt(guess)
+        finished! if guess.correct?
+      end
     end
   end
 end
