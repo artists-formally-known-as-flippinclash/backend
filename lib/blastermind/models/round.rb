@@ -6,9 +6,9 @@ module Blastermind
     class Round < Sequel::Model
       SOLUTION_LENGTH = 4
 
-      def self.generate
+      def self.generate(match)
         solution = CodePeg::STATES.sample(SOLUTION_LENGTH)
-        new(solution: Sequel.pg_array(solution, :code_peg))
+        new(solution: Sequel.pg_array(solution, :code_peg), match: match)
       end
 
       many_to_one :match
