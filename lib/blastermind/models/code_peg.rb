@@ -9,6 +9,12 @@ module Blastermind
         EPSILON = "epsilon".freeze,
         ZETA = "zeta".freeze,
       ].freeze
+
+      SOLUTION_LENGTH = 4
+
+      def self.generate_solution
+        STATES.sample(SOLUTION_LENGTH)
+      end
     end
   end
 end

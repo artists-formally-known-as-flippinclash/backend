@@ -4,10 +4,7 @@ require "blastermind/models/code_peg"
 module Blastermind
   module Models
     class Round < Sequel::Model
-      SOLUTION_LENGTH = 4
-
-      def self.generate(match)
-        solution = CodePeg::STATES.sample(SOLUTION_LENGTH)
+      def self.generate(match, solution = CodePeg.generate_solution)
         new(solution: Sequel.pg_array(solution, :code_peg), match: match)
       end
 
