@@ -52,6 +52,14 @@ module Blastermind
             trigger(MATCH_STARTED)
           end
         end
+
+        event :finish do
+          transitions from: IN_PROGRESS, to: FINISHED
+
+          after do
+            trigger(MATCH_ENDED)
+          end
+        end
       end
 
       one_to_many :players

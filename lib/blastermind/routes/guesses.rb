@@ -51,6 +51,10 @@ module Blastermind
 
         round.attempt(guess)
 
+        if match.rounds.all?(&:finished?)
+          match.finish!
+        end
+
         status 201
         guess
           .extend(Representers::IndividualGuess)
