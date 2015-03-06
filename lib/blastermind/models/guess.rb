@@ -9,6 +9,10 @@ module Blastermind
       many_to_one :player
       many_to_one :round
 
+      def correct?
+        code_pegs == round.solution
+      end
+
       def outcome
         correct? ? CORRECT : INCORRECT
       end
