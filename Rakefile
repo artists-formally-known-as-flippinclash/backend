@@ -4,11 +4,8 @@ unless ENV["RACK_ENV"] == "production"
 end
 
 desc "Start a Blastermind console"
-task :console do
-  lib_path = File.expand_path('lib')
-  $LOAD_PATH << lib_path
+task console: :environment do
   require "pry"
-  require "blastermind"
   Pry.start
 end
 
@@ -41,4 +38,10 @@ namespace :db do
       File.open("db/schema.rb", "w") { |f| f.write(schema) }
     end
   end
+end
+
+task :environment do
+  lib_path = File.expand_path('lib')
+  $LOAD_PATH << lib_path
+  require "blastermind"
 end
