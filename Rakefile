@@ -45,3 +45,10 @@ task :environment do
   $LOAD_PATH << lib_path
   require "blastermind"
 end
+
+require "resque/tasks"
+require 'resque/scheduler/tasks'
+
+namespace :resque do
+  task setup: :environment
+end
