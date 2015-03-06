@@ -7,6 +7,7 @@ module Blastermind
 
       def self.perform(match_id)
         match = Models::Match.first(id: match_id)
+        match.start!
       end
     end
   end
