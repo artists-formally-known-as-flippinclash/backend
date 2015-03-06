@@ -61,6 +61,10 @@ module Blastermind
         "match-#{id}"
       end
 
+      def current_round
+        rounds.find { |r| !r.finished? }
+      end
+
       private
 
       def trigger(event)
