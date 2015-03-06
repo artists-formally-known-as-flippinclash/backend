@@ -2,10 +2,10 @@ require "json"
 require "sinatra"
 require "sinatra/cross_origin"
 require "resque-scheduler"
-require "blastermind/jobs"
 require "blastermind/jobs/match_start"
 require "blastermind/models/match"
 require "blastermind/pusher"
+require "blastermind/representers/individual_match"
 require "blastermind/representers/matches"
 
 module Blastermind

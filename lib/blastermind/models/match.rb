@@ -1,5 +1,4 @@
 require "sequel/model"
-require "blastermind/match_state_machine"
 
 module Blastermind
   module Models
@@ -12,6 +11,12 @@ module Blastermind
         MATCH_ENDED = "match-ended".freeze,
       ].freeze
 
+      STATES = [
+        MATCH_MAKING = "match-making".freeze,
+        IN_PROGRESS = "in-progress".freeze,
+        FINISHED = "finished".freeze,
+      ].freeze
+
       def self.create_to_play
         create(state: MatchStateMachine::MATCH_MAKING)
       end
@@ -21,7 +26,7 @@ module Blastermind
       end
 
       def self.playable
-        where(state: MatchStateMachine::MATCH_MAKING).find do |match|
+        where(state: MATCH_MAKING).find do |match|
           match.players.count < MAX_PLAYERS
         end
       end
@@ -30,10 +35,6 @@ module Blastermind
 
       def channel
         "match-#{id}"
-      end
-
-      def state_machine
-        @state_machine ||= MatchStateMachine.new(self)
       end
     end
   end

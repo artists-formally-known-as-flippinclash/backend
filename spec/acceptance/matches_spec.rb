@@ -1,6 +1,5 @@
 require "request_helper"
 require "json"
-require "blastermind/match_state_machine"
 require "blastermind/models/match"
 
 describe "/matches" do
@@ -34,7 +33,7 @@ describe "/matches" do
         expect(last_response.status).to eq(201) # created
         expect(response_data.fetch("id")).to eq(match.id)
         expect(response_data).to include("channel")
-        expect(response_data.fetch("state")).to eq(Blastermind::MatchStateMachine::MATCH_MAKING)
+        expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING.to_s)
       end
     end
 
@@ -50,7 +49,7 @@ describe "/matches" do
         expect(last_response.status).to eq(201) # created
         expect(response_data).to include("id")
         expect(response_data).to include("channel")
-        expect(response_data.fetch("state")).to eq(Blastermind::MatchStateMachine::MATCH_MAKING)
+        expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING.to_s)
       end
     end
 
@@ -61,7 +60,7 @@ describe "/matches" do
         expect(last_response.status).to eq(201) # created
         expect(response_data).to include("id")
         expect(response_data).to include("channel")
-        expect(response_data.fetch("state")).to eq(Blastermind::MatchStateMachine::MATCH_MAKING)
+        expect(response_data.fetch("state")).to eq(Blastermind::Models::Match::MATCH_MAKING.to_s)
       end
     end
 
