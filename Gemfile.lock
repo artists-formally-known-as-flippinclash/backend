@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.1.0)
     addressable (2.3.7)
     coderay (1.1.0)
     cookiejar (0.3.2)
@@ -115,6 +116,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   database_cleaner
   dotenv
   fakeredis
