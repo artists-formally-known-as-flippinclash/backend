@@ -8,6 +8,8 @@ module Blastermind
         new(solution: Sequel.pg_array(solution, :code_peg), match: match)
       end
 
+      MAX_GUESS_COUNT = 8
+
       one_to_many :guesses
       many_to_one :match
 

@@ -43,6 +43,11 @@ module Blastermind
           return { errors: ["The match is not in progress!"] }.to_json
         end
 
+        if Models::Guess.where(round: round, player: player).count == Models::Round::MAX_GUESS_COUNT
+          status 422
+          return { errors: ["You cannot submit anymore guesses!"] }.to_json
+        end
+
         guess = Models::Guess.create(
           code_pegs: Sequel.pg_array(code_pegs, :code_pegs),
           player_id: player_id,
