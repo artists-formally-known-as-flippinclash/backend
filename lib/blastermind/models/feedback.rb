@@ -7,7 +7,8 @@ module Blastermind
       end
 
       def peg_count
-        (guess.code_pegs & round.solution).count
+        missing_count = (round.solution - guess.code_pegs).count
+        round.solution.count - missing_count - position_count
       end
 
       def position_count
