@@ -9,6 +9,7 @@ module Blastermind
       property :id
       property :state
       property :channel
+      property :name
 
       collection :players, extend: Player
     end
