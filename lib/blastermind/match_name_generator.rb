@@ -1,6 +1,8 @@
 module Blastermind
   module MatchNameGenerator
     EVENTS = [
+      "Necromancer",
+      "Harbinger",
       "Bane",
       "Clash",
       "Assault",
