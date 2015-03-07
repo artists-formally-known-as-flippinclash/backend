@@ -8,6 +8,7 @@ module Blastermind
 
       property :id
       property :outcome
+      property :code_pegs
       property :feedback, extend: Feedback
     end
   end
