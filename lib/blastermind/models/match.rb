@@ -1,5 +1,6 @@
 require "aasm"
 require "sequel/model"
+require "blastermind/match_name_generator"
 require "blastermind/models/round"
 
 module Blastermind
@@ -20,9 +21,9 @@ module Blastermind
         FINISHED = :finished,
       ].freeze
 
-      def self.create_to_play(&on_create)
+      def self.create_to_play(name: MatchNameGenerator.generate, &on_create)
         on_create ||= lambda{|*|}
-        create(state: MATCH_MAKING.to_s).tap do |match|
+        create(state: MATCH_MAKING.to_s, name: name).tap do |match|
           ROUNDS_COUNT.times { Round.generate(match).save }
           on_create.call(match)
         end
