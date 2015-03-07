@@ -76,6 +76,16 @@ module Blastermind
         rounds.find { |r| !r.finished? }
       end
 
+      def winner
+        rounds
+          .map(&:winner)
+          .compact
+          .each_with_object(Hash.new(0)) { |winner, counts| counts[winner] += 1 }
+          .sort_by(&:last)
+          .last
+          .first
+      end
+
       private
 
       def trigger(event)
