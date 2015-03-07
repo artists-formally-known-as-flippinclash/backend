@@ -1,5 +1,6 @@
 require "roar/json"
 require "blastermind/representers/player"
+require "blastermind/representers/round"
 
 module Blastermind
   module Representers
@@ -12,6 +13,7 @@ module Blastermind
       property :name
 
       collection :players, extend: Player
+      collection :rounds, extend: Round
     end
   end
 end
