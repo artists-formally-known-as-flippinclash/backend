@@ -18,6 +18,11 @@ module Blastermind
       one_to_many :guesses
       many_to_one :match
 
+      def winner
+        guess = guesses.find(&:correct?)
+        guess && guess.player
+      end
+
       def finished?
         finished
       end
