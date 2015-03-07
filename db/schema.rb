@@ -3,6 +3,7 @@ Sequel.migration do
     create_table(:matches) do
       primary_key :id
       String :state, :null=>false
+      String :name, :text=>true, :null=>false
     end
     
     create_table(:schema_info) do
