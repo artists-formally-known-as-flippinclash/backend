@@ -1,7 +1,7 @@
 module Blastermind
   module MatchNameGenerator
     EVENTS = [
-      "Bain",
+      "Bane",
       "Clash",
       "Assault",
       "Battle",
