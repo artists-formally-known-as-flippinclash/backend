@@ -29,6 +29,11 @@ module Blastermind
 
       def attempt(guess)
         finished! if guess.correct?
+        finished! if all_guessed_out?
+      end
+
+      def all_guessed_out?
+        guesses.group_by(&:player).values.all? { |guesses| guesses.count == MAX_GUESS_COUNT }
       end
 
       private
