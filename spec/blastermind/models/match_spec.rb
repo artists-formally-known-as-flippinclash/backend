@@ -17,5 +17,10 @@ describe Blastermind::Models::Match do
 
       expect(match.winner).to eq(player)
     end
+
+    it "is nil when there is no winner" do
+      match = described_class.create_to_play
+      expect(match.winner).to eq(nil)
+    end
   end
 end

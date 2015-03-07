@@ -77,13 +77,15 @@ module Blastermind
       end
 
       def winner
-        rounds
-          .map(&:winner)
-          .compact
-          .each_with_object(Hash.new(0)) { |winner, counts| counts[winner] += 1 }
-          .sort_by(&:last)
-          .last
-          .first
+        winners = rounds.map(&:winner).compact
+
+        unless winners.empty?
+          winners
+            .each_with_object(Hash.new(0)) { |winner, counts| counts[winner] += 1 }
+            .sort_by(&:last)
+            .last
+            .first
+        end
       end
 
       private
