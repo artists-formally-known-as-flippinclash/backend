@@ -67,8 +67,9 @@ describe "/matches" do
     it "includes player in match" do
       post "/matches", player_params
 
-      players = response_data.fetch("players")
-      expect(players.first.fetch("name")).to eq("J")
+      player_response = json_response.fetch("you")
+      expect(player_response).to include("id")
+      expect(player_response.fetch("name")).to eq(player_name)
     end
   end
 end

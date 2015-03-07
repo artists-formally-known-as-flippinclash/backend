@@ -63,6 +63,8 @@ module Blastermind
         end
       end
 
+      attr_accessor :you
+
       one_to_many :players
       one_to_many :rounds
 

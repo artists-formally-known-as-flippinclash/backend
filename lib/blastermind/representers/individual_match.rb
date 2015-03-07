@@ -1,5 +1,6 @@
 require "roar/json"
 require "blastermind/representers/match"
+require "blastermind/representers/player"
 
 module Blastermind
   module Representers
@@ -7,6 +8,7 @@ module Blastermind
       include Roar::JSON
 
       property :data, extend: Match
+      property :you, extend: Player
 
       private
 

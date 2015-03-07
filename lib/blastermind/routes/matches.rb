@@ -39,7 +39,8 @@ module Blastermind
           Resque.enqueue_in(MATCH_START_DELAY, Jobs::MatchStart, match.id)
         end
 
-        Models::Player.create(name: player_params["name"], match: match)
+        player = Models::Player.create(name: player_params["name"], match: match)
+        match.you = player
         match.reload()
 
         if match.players.count == Models::Match::MAX_PLAYERS
