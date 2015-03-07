@@ -55,6 +55,7 @@ module Blastermind
         )
 
         round.attempt(guess)
+        match.progress
 
         if match.rounds.all?(&:finished?)
           match.finish!

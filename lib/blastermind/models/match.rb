@@ -76,6 +76,10 @@ module Blastermind
         rounds.find { |r| !r.finished? }
       end
 
+      def progress
+        trigger(MATCH_PROGRESS)
+      end
+
       def winner
         winners = rounds.map(&:winner).compact
 
