@@ -11,6 +11,7 @@ module Blastermind
       property :state
       property :channel
       property :name
+      property :winner, extend: Player
 
       collection :players, extend: Player
       collection :rounds, extend: Round
